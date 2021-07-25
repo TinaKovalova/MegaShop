@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {CategoryService} from "./services/category.service";
+import {Category} from "./intrfaces";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'shop';
+  title=''
+  categories?:Category[]
+
+  constructor(private categoryService:CategoryService) {}
+
+  getAllCategories() {
+    this.categoryService.getAll().subscribe(categories =>this.categories=categories)
+  }
 }
