@@ -1,0 +1,43 @@
+<div class="p-2">
+  <div class="page-title">
+    <h5 >
+      <a routerLink="/admin/manufacturer">Производитель></a>
+      {{isNew?'Добавление':'Редактирование'}} производителя
+    </h5>
+
+  </div>
+
+  <div class="row">
+    <form class="col-6" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="input-group mb-3">
+        <label for="name" class="input-group-text">Название</label>
+        <input id="name"
+               type="text"
+
+               placeholder="Название производителя"
+               aria-label="Название производителя"
+               formControlName="name"
+               [ngClass]="{'form-control is-invalid': form.invalid || form.disabled}">
+        <span *ngIf="_name.errors?.required && (_name.touched || _name.dirty)" class="text-danger">
+            Введите название производителя
+        </span>
+        <span>
+        <button class="btn btn-outline-secondary ml-2"
+                (click)="onDelete(manufacturer.manufacturerId)">
+          <i >Удалить</i>
+        </button>
+      </span>
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="btn btn-outline-info"
+          [disabled]="form.invalid || form.disabled">
+
+          Сохранить изменения
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>
