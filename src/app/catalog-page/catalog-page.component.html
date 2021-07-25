@@ -1,0 +1,77 @@
+
+<div class="container-fluid">
+
+  <div class="row">
+  <div class="list-group col-md-3 p-2">
+    <div class="d-flex">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-info" type="button">Search</button>
+    </div>
+
+    <div class="accordion accordion-flush " id="accordionFlushExample">
+      <div class="accordion-item" >
+        <h2 class="accordion-header" id="flush-headingOne">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            Производитель
+          </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body " *ngIf="manufacturers" >
+           <div class="form-check" *ngFor="let m of manufacturers" >
+             <input class="form-check-input"
+                    type="checkbox"
+                    [value]="m.manufacturerId"
+                    (change)="sortByManufacturer(m.manufacturerId)"
+                    [id]="m.manufacturerName">
+            <label class="form-check-label" [for]="m.manufacturerName">{{m.manufacturerName}}</label>
+           </div>
+          </div>
+      </div>
+      </div>
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTwo">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+            Цена
+          </button>
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="col-9">
+  <div class="d-flex flex-row flex-wrap" *ngIf="goods else loading" >
+    <div class="card m-2 p-2" style="width: 18rem" *ngFor="let g of goods" (click)="getInfo($event)">
+      <a [routerLink]="['/catalog',g.goodId]"
+         [queryParams]="{category:categoryId}">
+        <img src="https://www.nix.ru/art/pic/web_news/2014/mar/ps1396003354.jpg" class="card-img-top" alt="goods photo">
+      </a>
+      <div class="card-body ">
+        <h5 class="card-title">{{g.goodName}}</h5>
+        <!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+        <p class="card-text">{{g.price}}</p>
+        <a href="#" class="btn btn-primary">Купить</a>
+      </div>
+    </div>
+
+  </div>
+    <ng-template #loading>
+      <div class="d-flex align-items-center">
+        <strong>Загрузка...</strong>
+        <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+      </div>
+    </ng-template>
+  </div>
+
+
+
+
+
+
+  </div>
+
+</div>

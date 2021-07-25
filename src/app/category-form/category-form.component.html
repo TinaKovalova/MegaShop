@@ -1,0 +1,41 @@
+<div class="p-2">
+  <div class="page-title">
+    <h5>
+      <a routerLink="/admin/category">Категории</a>
+      >{{isNew?'Добавление':'Редактирование'}} категории
+    </h5>
+    <!--  <span>-->
+    <!--    <button class="btn btn-outline-info">-->
+    <!--      <i >Удалить</i>-->
+    <!--    </button>-->
+    <!--  </span>-->
+  </div>
+
+  <div class="row">
+    <form class="col-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="input-group mb-3">
+        <label for="name" class="input-group-text">Название</label>
+        <input id="name"
+               type="text"
+
+               placeholder="Название категории"
+               aria-label="Название категории"
+               formControlName="name"
+               [ngClass]="{'form-control is-invalid': _name.invalid || form.disabled}"
+        >
+        <span *ngIf="_name.errors?.required && (_name.touched || _name.dirty)" class="text-danger">
+            Введите название категории
+          </span>
+      </div>
+      <div>
+        <button
+          type="submit"
+          class="btn btn-outline-info">
+
+          Сохранить изменения
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>
