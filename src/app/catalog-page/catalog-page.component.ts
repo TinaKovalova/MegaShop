@@ -3,7 +3,7 @@ import {GoodsService} from "../services/goods.service";
 import {ManufacturerService} from "../services/manufacturer.service";
 import {Goods, Manufacturer} from "../intrfaces";
 import {ActivatedRoute} from "@angular/router";
-import {filter} from "rxjs/operators";
+
 
 @Component({
   selector: 'app-catalog-page',

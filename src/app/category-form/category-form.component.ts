@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms'
+import {ActivatedRoute, Params, Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {switchMap} from "rxjs/operators";
 import {CategoryService} from "../services/category.service";
 import {of} from "rxjs";
@@ -18,7 +18,8 @@ export class CategoryFormComponent implements OnInit {
 
   constructor(private route:ActivatedRoute,
               private fb:FormBuilder,
-              private categoryService:CategoryService) { }
+              private categoryService:CategoryService,
+              private router:Router) { }
 
   ngOnInit(): void {
 
@@ -54,6 +55,18 @@ export class CategoryFormComponent implements OnInit {
   }
 
   onSubmit() {
+    let sub$
+    if(this.isNew){
+      sub$=this.categoryService.add(this.form.value.name)
+    }else {
+      sub$=this.categoryService.update(this.category.categoryId,this.form.value.name)
+    }
+    sub$.subscribe( ()=>this.router.navigate(['/admin/category']))
+  }
 
+  onDelete(categoryId: number) {
+    console.log('onSubmit')
+    this.categoryService.delete(categoryId)
+      .subscribe(()=>this.router.navigate(['/admin/category']))
   }
 }

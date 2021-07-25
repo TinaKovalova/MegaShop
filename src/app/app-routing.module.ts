@@ -8,6 +8,7 @@ import {AdminPageComponent} from "./admin-page/admin-page.component";
 import {GoodsComponent} from "./goods/goods.component";
 import {CategoryComponent} from "./category/category.component";
 import {ManufacturerComponent} from "./manufacturer/manufacturer.component";
+import {ManufacturerFormComponent} from "./manufacturer-form/manufacturer-form.component"
 import {GoodsViewComponent} from "./goods-view/goods-view.component";
 import {CategoryFormComponent} from "./category-form/category-form.component";
 
@@ -23,7 +24,8 @@ const routes: Routes = [
       {path:'category/new', component:CategoryFormComponent},
       {path:'category/:id', component:CategoryFormComponent},
       {path:'manufacturer', component:ManufacturerComponent},
-
+      {path:'manufacturer/new', component:ManufacturerFormComponent},
+      {path:'manufacturer/:id', component:ManufacturerFormComponent}
     ]},
   {path:'**', redirectTo:'/'}
 ];

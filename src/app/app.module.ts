@@ -17,6 +17,7 @@ import { CategoryComponent } from './category/category.component';
 import { ManufacturerComponent } from './manufacturer/manufacturer.component';
 import { GoodsViewComponent } from './goods-view/goods-view.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
+import { ManufacturerFormComponent } from './manufacturer-form/manufacturer-form.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { CategoryFormComponent } from './category-form/category-form.component';
     CategoryComponent,
     ManufacturerComponent,
     GoodsViewComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    ManufacturerFormComponent
   ],
   imports: [
     BrowserModule,

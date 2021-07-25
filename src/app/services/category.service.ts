@@ -16,11 +16,11 @@ export class CategoryService {
   getById(id:number):Observable<Category>{
     return this.http.get<Category>(`${this.baseUrl}/${id}`)
   }
-  add(category:Category):Observable<Category>{
-    return this.http.post<Category>(this.baseUrl,category)
+  add(categoryName:string):Observable<Category>{
+    return this.http.post<Category>(this.baseUrl, {categoryName})
   }
-  update(id:number, category:Category):Observable<Category>{
-    return this.http.put<Category>(`${this.baseUrl}/${id}`,category)
+  update(id:number, categoryName:string):Observable<Category>{
+    return this.http.put<Category>(`${this.baseUrl}/${id}`, {categoryName})
   }
   delete(id:number):Observable<Category>{
     return this.http.delete<Category>(`${this.baseUrl}/${id}`)

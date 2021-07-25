@@ -4,11 +4,11 @@
           routerLink="/admin/category/new">Добавить категорию
   </button>
 </div>
-<ul class="list-group list-group-flush" *ngIf="categories$ |async as categories; else loading">
-  <a [routerLink]="['/admin/category',category.categoryId]"
-     class="list-group-item"
-     *ngFor="let category of categories"><span>{{category.categoryId}} {{category.categoryName}}</span></a>
-
+<ul class="list-group list-group-flush" *ngIf="categories$ | async as categories; else loading">
+  <a class="list-group-item"
+     *ngFor="let category of categories"
+     [routerLink]="['/admin/category', category.categoryId]">
+    <span>{{category.categoryId}} {{category.categoryName}}</span></a>
 
 </ul>
 <ng-template #loading>

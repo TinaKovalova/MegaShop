@@ -1,1 +1,19 @@
-<p>manufacturer works!</p>
+<div>
+  <h4>Производитель</h4>
+  <button class="btn btn-outline-info"
+          routerLink="/admin/manufacturer/new">Добавить производителя
+  </button>
+</div>
+<ul class="list-group list-group-flush" *ngIf="manufacturers$ | async as manufacturers; else loading">
+  <a class="list-group-item"
+     *ngFor="let manufacturer of manufacturers"
+     [routerLink]="['/admin/manufacturer',manufacturer.manufacturerId]">
+    <span>{{manufacturer.manufacturerId}} {{manufacturer.manufacturerName}}</span>
+  </a>
+</ul>
+<ng-template #loading>
+  <div class="d-flex align-items-center">
+    <strong>Загрузка...</strong>
+    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+  </div>
+</ng-template>

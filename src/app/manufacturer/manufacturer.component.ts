@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {Manufacturer} from "../intrfaces";
+import {Observable, of} from "rxjs";
+import {ManufacturerService} from "../services/manufacturer.service";
 
 @Component({
   selector: 'app-manufacturer',
@@ -7,9 +10,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManufacturerComponent implements OnInit {
 
-  constructor() { }
-
+  manufacturers$!:Observable<Manufacturer[]>
+  constructor(private manufacturerService: ManufacturerService) {}
   ngOnInit(): void {
+    this.manufacturers$= this.manufacturerService.getAll()
   }
-
 }

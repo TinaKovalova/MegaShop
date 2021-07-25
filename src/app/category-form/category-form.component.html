@@ -1,18 +1,14 @@
 <div class="p-2">
   <div class="page-title">
-    <h5>
+    <h5 >
       <a routerLink="/admin/category">Категории</a>
-      >{{isNew?'Добавление':'Редактирование'}} категории
+      {{isNew?'Добавление':'Редактирование'}} категории
     </h5>
-    <!--  <span>-->
-    <!--    <button class="btn btn-outline-info">-->
-    <!--      <i >Удалить</i>-->
-    <!--    </button>-->
-    <!--  </span>-->
+
   </div>
 
   <div class="row">
-    <form class="col-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form class="col-6" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="input-group mb-3">
         <label for="name" class="input-group-text">Название</label>
         <input id="name"
@@ -21,16 +17,22 @@
                placeholder="Название категории"
                aria-label="Название категории"
                formControlName="name"
-               [ngClass]="{'form-control is-invalid': _name.invalid || form.disabled}"
-        >
+               [ngClass]="{'form-control is-invalid': form.invalid || form.disabled}">
         <span *ngIf="_name.errors?.required && (_name.touched || _name.dirty)" class="text-danger">
             Введите название категории
-          </span>
+        </span>
+        <span>
+        <button class="btn btn-outline-secondary ml-2"
+                (click)="onDelete(category.categoryId)">
+          <i >Удалить</i>
+        </button>
+      </span>
       </div>
       <div>
         <button
           type="submit"
-          class="btn btn-outline-info">
+          class="btn btn-outline-info"
+          [disabled]="form.invalid || form.disabled">
 
           Сохранить изменения
         </button>
