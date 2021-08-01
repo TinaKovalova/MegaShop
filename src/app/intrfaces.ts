@@ -30,12 +30,12 @@ export interface SalePosition{
 
 export interface Sale{
   saleId:number
-  NumberSale:number
-  UserPhone:string
-  UserEmail:string
-  DateSale?:number
-  Summa:number
-  SalePos:SalePosition[]
+  numberSale:number
+  userPhone:string
+  userEmail:string
+  dateSale?:number
+  summa:number
+  salePos:SalePosition[]
 
 
 }

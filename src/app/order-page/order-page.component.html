@@ -10,11 +10,13 @@
   </thead>
   <tbody *ngIf="order.length>0; else empty">
   <tr *ngFor="let item of order; index as i">
-    <th scope="row">{{i+1}}</th>
-    <td >{{item.goodName}}</td>
+    <th scope="row">{{i + 1}}</th>
+    <td>{{item.goodName}}</td>
     <td>{{item.countGood}}</td>
     <td>{{item.summa}}</td>
-    <td><button (click)="deletePosition(i)">X</button></td>
+    <td>
+      <button (click)="deletePosition(i)">X</button>
+    </td>
   </tr>
 
   </tbody>
@@ -25,6 +27,34 @@
 <p>
   Сумма заказа: {{sum}}
 </p>
-<div>
-  <button type="submit" class="btn btn-secondary btn-lg btn-block" (click)="placeAnOrder()">Оформить заказ</button>
+
+<p>
+  <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
+          aria-expanded="false" aria-controls="collapseExample">
+    Оформить заказ
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body w-50">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Email"
+               formControlName="email">
+        <span  class="form-control" *ngIf="_email.errors?.required && (_email.touched || _email.dirty)" class="text-danger">
+            *Обязательное поле
+        </span>
+      </div>
+      <div class="mb-3">
+        <input type="tel" class="form-control" placeholder="Номер телефона"
+               formControlName="phone">
+        <span *ngIf="_phone.errors?.required && (_phone.touched || _phone.dirty)" class="text-danger">
+            *Обязательное поле
+        </span>
+        <span *ngIf="_phone.errors?.pattern && (_phone.touched || _phone.dirty)"
+              class="text-danger">*Введите номер телефона в формате +38хххххххххх </span>
+      </div>
+      <button type="submit" class="btn btn-primary"
+              [disabled]="form.invalid" >Подтвердить заказ</button>
+    </form>
+  </div>
 </div>
