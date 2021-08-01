@@ -45,16 +45,19 @@
 
   <div class="col-9">
   <div class="d-flex flex-row flex-wrap" *ngIf="goods else loading" >
-    <div class="card m-2 p-2" style="width: 18rem" *ngFor="let g of goods" (click)="getInfo($event)">
-      <a [routerLink]="['/catalog',g.goodId]"
+    <div class="card m-2 p-2" style="width: 18rem"
+         *ngFor="let product of goods" >
+      <a [routerLink]="['/catalog',product.goodId]"
          [queryParams]="{category:categoryId}">
         <img src="https://www.nix.ru/art/pic/web_news/2014/mar/ps1396003354.jpg" class="card-img-top" alt="goods photo">
       </a>
       <div class="card-body ">
-        <h5 class="card-title">{{g.goodName}}</h5>
+        <h5 class="card-title">{{product.goodName}}</h5>
         <!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
-        <p class="card-text">{{g.price}}</p>
-        <a href="#" class="btn btn-primary">Купить</a>
+        <p class="card-text">{{product.price}}</p>
+        <button type="button"
+                class="btn btn-dark"
+        (click)="buy(product)">Купить</button>
       </div>
     </div>
 

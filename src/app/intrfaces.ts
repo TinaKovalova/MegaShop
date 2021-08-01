@@ -1,7 +1,7 @@
 export interface Goods{
-  goodId:string
+  goodId:number
   goodName:string
-  goodCount:number
+  goodCount?:number
   price:number
   manufacturerId:number
   categoryId:number
@@ -17,4 +17,25 @@ export interface Category{
 export interface Manufacturer{
   manufacturerId:number
   manufacturerName:string
+}
+
+export interface SalePosition{
+  salePosId?:number
+  saleId?:number
+  goodId:number
+  countGood:number
+  summa:number
+  goodName:string
+}
+
+export interface Sale{
+  saleId:number
+  NumberSale:number
+  UserPhone:string
+  UserEmail:string
+  DateSale?:number
+  Summa:number
+  SalePos:SalePosition[]
+
+
 }

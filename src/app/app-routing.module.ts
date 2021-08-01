@@ -11,6 +11,7 @@ import {ManufacturerComponent} from "./manufacturer/manufacturer.component";
 import {ManufacturerFormComponent} from "./manufacturer-form/manufacturer-form.component"
 import {GoodsViewComponent} from "./goods-view/goods-view.component";
 import {CategoryFormComponent} from "./category-form/category-form.component";
+import {GoodsFormComponent} from "./goods-form/goods-form.component";
 
 const routes: Routes = [
   {path:'home', component:HomePageComponent},
@@ -20,6 +21,8 @@ const routes: Routes = [
   {path:'contacts', component:ContactsPageComponent},
   {path:'admin', component:AdminPageComponent, children:[
       {path:'goods', component:GoodsComponent},
+      {path:'goods/new', component:GoodsFormComponent},
+      {path:'goods/:id', component:GoodsFormComponent},
       {path:'category', component:CategoryComponent},
       {path:'category/new', component:CategoryFormComponent},
       {path:'category/:id', component:CategoryFormComponent},

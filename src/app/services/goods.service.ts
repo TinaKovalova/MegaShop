@@ -18,11 +18,12 @@ export class GoodsService {
   getById(id:number):Observable<Goods>{
     return this.http.get<Goods>(`${this.baseUrl}/${id}`)
   }
-  create(goods:Goods):Observable<Goods>{
-    return this.http.post<Goods>(this.baseUrl,goods)
+  add(goodName:string, price:number, categoryId:number, manufacturerId:number):Observable<Goods>{
+    return this.http.post<Goods>(this.baseUrl, {goodName,price,categoryId,manufacturerId})
   }
-  update(id:number, goods:Goods):Observable<Goods>{
-    return this.http.put<Goods>(`${this.baseUrl}/${id}`,goods)
+
+  update(id: number,goodName:string, price:number, categoryId:number, manufacturerId:number):Observable<Goods>{
+    return this.http.put<Goods>(`${this.baseUrl}/${id}`,{goodName,price,categoryId,manufacturerId})
   }
   delete(id:number):Observable<Goods>{
     return this.http.delete<Goods>(`${this.baseUrl}/${id}`)
