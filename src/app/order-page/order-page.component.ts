@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderService} from "../services/order.service";
 import {SalePosition} from "../intrfaces";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OrdersService} from "../services/orders.service";
-import {Router} from "@angular/router";
+
 
 
 @Component({
@@ -11,23 +11,26 @@ import {Router} from "@angular/router";
   templateUrl: './order-page.component.html',
   styleUrls: ['./order-page.component.css']
 })
-export class OrderPageComponent implements OnInit {
+export class OrderPageComponent implements OnInit, OnDestroy {
   form!:FormGroup
   order:SalePosition[]=[]
   sum=0
+  isOrdered=false
   constructor( private orderService:OrderService,
                private ordersService:OrdersService,
-               private fb:FormBuilder,
-               private router: Router) { }
+               private fb:FormBuilder) { }
+
 
   ngOnInit(): void {
     this.order=this.orderService.order
     this.sum=this.orderService.sum
     this.form=this.fb.group({
       email:[null,[Validators.required,Validators.email]],
-      phone:[null,[Validators.required,Validators.pattern(/^\+\d{12}/)]]
+      phone:[null,[Validators.required,Validators.pattern(/^\d{10,10}/)]]
     })
-
+  }
+  ngOnDestroy(): void {
+    this.isOrdered=false
   }
   get _phone() {
     return this.form.get('phone')!
@@ -43,7 +46,12 @@ export class OrderPageComponent implements OnInit {
 
    onSubmit() {
 
-      this.ordersService.add(this.form.value.email, this.form.value.phone,this.sum,this.order)
-        .subscribe( ()=>this.router.navigate(['/catalog']))
+      this.ordersService.add(this.form.value.phone,this.form.value.email,this.sum,this.order)
+        .subscribe( ()=>{
+          this.isOrdered=true
+          this.orderService.clearOrder()
+        })
   }
+
+
 }

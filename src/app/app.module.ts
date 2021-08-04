@@ -8,7 +8,6 @@ import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import {RouterModule} from "@angular/router";
-import { ContactsPageComponent } from './contacts-page/contacts-page.component';
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import {HttpClientModule} from "@angular/common/http";
 import { GoodsComponent } from './goods/goods.component';
@@ -27,7 +26,6 @@ import { GoodsFormComponent } from './goods-form/goods-form.component';
     CatalogPageComponent,
     OrderPageComponent,
     LoginPageComponent,
-    ContactsPageComponent,
     AdminPageComponent,
     GoodsComponent,
     CategoryComponent,

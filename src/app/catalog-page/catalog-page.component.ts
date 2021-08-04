@@ -6,7 +6,6 @@ import {ActivatedRoute} from "@angular/router";
 import {OrderService} from "../services/order.service";
 
 
-
 @Component({
   selector: 'app-catalog-page',
   templateUrl: './catalog-page.component.html',
@@ -19,7 +18,7 @@ export class CatalogPageComponent implements OnInit {
   goods: Goods[] = []
   categoryId: number | undefined
   manufacturerIds: number[] = []
-
+  findString!: string
 
   constructor(private goodService: GoodsService,
               private manufacturerService: ManufacturerService,
@@ -31,6 +30,7 @@ export class CatalogPageComponent implements OnInit {
     this.getAllGoods()
     this.getAllManufacturers()
     console.log('oninit')
+    console.log(this.findString)
   }
 
   getAllGoods() {
