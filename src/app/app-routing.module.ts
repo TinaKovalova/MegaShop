@@ -11,6 +11,7 @@ import {ManufacturerFormComponent} from "./manufacturer-form/manufacturer-form.c
 import {GoodsViewComponent} from "./goods-view/goods-view.component";
 import {CategoryFormComponent} from "./category-form/category-form.component";
 import {GoodsFormComponent} from "./goods-form/goods-form.component";
+import {RegistrationPageComponent} from "./registration-page/registration-page.component";
 
 const routes: Routes = [
   {path:'home', component:HomePageComponent},
@@ -28,6 +29,7 @@ const routes: Routes = [
       {path:'manufacturer/new', component:ManufacturerFormComponent},
       {path:'manufacturer/:id', component:ManufacturerFormComponent}
     ]},
+  {path:'registration', component:RegistrationPageComponent},
   {path:'**', redirectTo:'/'}
 ];
 

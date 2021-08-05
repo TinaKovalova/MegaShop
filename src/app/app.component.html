@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li routerLinkActive="active">
-        <a class="nav-link navbar-brand" routerLink="/home" >Главная</a>
+        <a class="nav-link navbar-brand" routerLink="/home">Главная</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle"
@@ -22,18 +22,32 @@
         </ul>
       </li>
       <li routerLinkActive="active">
-        <a class="nav-link navbar-brand" routerLink="/order" >Корзина</a>
+        <a class="nav-link navbar-brand" routerLink="/order">Корзина</a>
       </li>
       <li routerLinkActive="active">
-        <a class="nav-link navbar-brand" routerLink="/admin" >Admin</a>
+        <a class="nav-link navbar-brand" routerLink="/admin">Admin</a>
       </li>
     </ul>
-    <form class="d-flex">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-info" type="submit">Search</button>
-    </form>
+
 
   </div>
+  <form class="d-flex" formGroupName="loginForm" (ngSubmit)="login()">
+    <input class="form-control me-2" type="text" placeholder="email"  formControlName="email">
+    <input class="form-control me-2" type="text" placeholder="password"
+           formControlName="password">
+    <button class="btn btn-outline-info"
+            type="submit"
+            [disabled]="loginForm.invalid"
+    >Login
+    </button>
+
+  </form>
+  <button class="btn btn-outline-info" type="submit">Logout</button>
+  <button class="btn btn-outline-info" type="submit"
+          routerLink="/registration">Registration
+  </button>
+
+
 </nav>
 
 <div class="container-fluid">

@@ -6,7 +6,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomePageComponent } from './home-page/home-page.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
-import { LoginPageComponent } from './login-page/login-page.component';
 import {RouterModule} from "@angular/router";
 import { AdminPageComponent } from './admin-page/admin-page.component';
 import {HttpClientModule} from "@angular/common/http";
@@ -18,6 +17,7 @@ import { GoodsViewComponent } from './goods-view/goods-view.component';
 import { CategoryFormComponent } from './category-form/category-form.component';
 import { ManufacturerFormComponent } from './manufacturer-form/manufacturer-form.component';
 import { GoodsFormComponent } from './goods-form/goods-form.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,6 @@ import { GoodsFormComponent } from './goods-form/goods-form.component';
     HomePageComponent,
     CatalogPageComponent,
     OrderPageComponent,
-    LoginPageComponent,
     AdminPageComponent,
     GoodsComponent,
     CategoryComponent,
@@ -33,7 +32,8 @@ import { GoodsFormComponent } from './goods-form/goods-form.component';
     GoodsViewComponent,
     CategoryFormComponent,
     ManufacturerFormComponent,
-    GoodsFormComponent
+    GoodsFormComponent,
+    RegistrationPageComponent
   ],
   imports: [
     BrowserModule,

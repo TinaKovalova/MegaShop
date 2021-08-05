@@ -39,3 +39,9 @@ export interface Sale{
 
 
 }
+
+export interface User{
+  userName:string
+  userLogin:string
+  password:string
+}

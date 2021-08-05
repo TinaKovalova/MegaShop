@@ -29,7 +29,6 @@ export class CatalogPageComponent implements OnInit {
   ngOnInit(): void {
     this.getAllGoods()
     this.getAllManufacturers()
-    console.log('oninit')
     console.log(this.findString)
   }
 

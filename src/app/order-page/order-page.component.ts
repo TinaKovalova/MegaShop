@@ -26,7 +26,7 @@ export class OrderPageComponent implements OnInit, OnDestroy {
     this.sum=this.orderService.sum
     this.form=this.fb.group({
       email:[null,[Validators.required,Validators.email]],
-      phone:[null,[Validators.required,Validators.pattern(/^\d{10,10}/)]]
+      phone:[null,[Validators.required,Validators.pattern(/^\d{10,}/), Validators.maxLength(10)]]
     })
   }
   ngOnDestroy(): void {
