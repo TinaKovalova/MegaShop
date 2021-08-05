@@ -1,0 +1,47 @@
+<h3>Регистрация</h3>
+
+<div *ngIf="!isRegister" class="card card-body w-50">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="input-group mb-3">
+      <span class="input-group-text w-25" id="basic-addon1">Имя</span>
+      <input type="text" class="form-control" aria-label="Username"
+             aria-describedby="basic-addon1"
+             formControlName="name">
+      <span *ngIf="_name.errors?.required && (_name.touched || _name.dirty)" class="text-danger">
+            *Обязательное поле</span>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text w-25" id="basic-addon2">@</span>
+      <input type="email" class="form-control" aria-label="Email"
+             aria-describedby="basic-addon2"
+             formControlName="email">
+      <span class="form-control text-danger" *ngIf="_email.errors?.required && (_email.touched || _email.dirty)"
+      >*Обязательное поле</span>
+      <span class="form-control text-danger" *ngIf="_email.errors?.email && (_email.touched || _email.dirty)"
+      >*Некорректно введен email</span>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text w-25" id="basic-addon3">Пароль</span>
+      <input type="text" class="form-control" aria-label="password"
+             aria-describedby="basic-addon3"
+             formControlName="password">
+      <span *ngIf="_password.errors?.required && (_password.touched || _password.dirty)" class="text-danger">
+            *Обязательное поле</span>
+      <span *ngIf="_password.errors?.minLength && (_password.touched || _password.dirty)"
+            class="text-danger">*длина не менее 8 символов </span>
+      <span *ngIf="_password.errors?.maxlength"
+            class="text-danger">*длина не более 24 символа</span>
+    </div>
+    <button type="submit" class="btn btn-outline-info"
+            [disabled]="form.invalid">Зарегистрироваться
+    </button>
+  </form>
+</div>
+<div *ngIf="isRegister" class="card text-center w-50 m-5">
+  <div class="card-header">
+    <h3>&#10004;Регастрация прошла успешно</h3>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Войдите под своими учетными данными</h5>
+  </div>
+</div>

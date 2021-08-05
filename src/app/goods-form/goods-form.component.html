@@ -1,0 +1,88 @@
+<div class="p-2">
+  <div class="page-title">
+    <h5>
+      <a routerLink="/admin/goods">Товар</a>
+      {{isNew ? 'Добавление' : 'Редактирование'}} товара
+    </h5>
+
+  </div>
+
+  <div class="row">
+    <form class="col-6 p-2" [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="input-group mb-3 ">
+        <label for="name" class="input-group-text">Название</label>
+        <input id="name"
+               type="text"
+               placeholder="Название товара"
+               aria-label="Название товара"
+               formControlName="name"
+               [ngClass]="{'form-control is-invalid': _name.errors?.required && (_name.touched || _name.dirty)}">
+
+        <span *ngIf="_name.errors?.required && (_name.touched || _name.dirty)" class="text-danger">
+            Введите название товара
+        </span>
+        <span>
+        <button class="btn btn-outline-secondary ml-2"
+                (click)="onDelete(product.goodId)">
+          <i>Удалить</i>
+        </button>
+        </span>
+      </div>
+      <div class="input-group mb-3">
+        <label for="price" class="input-group-text">Цена</label>
+        <input id="price"
+               type="number"
+               placeholder="Цена товара"
+               aria-label="Цена товара"
+               formControlName="price"
+               [ngClass]="{'form-control is-invalid': _price.errors?.required && (_price.touched || _price.dirty)}">
+        <span *ngIf="_price.errors?.required && (_price.touched || _price.dirty)" class="text-danger">
+            Укажите цену товара
+        </span>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="categorySelect"> Категория товара</label>
+        </div>
+        <select class="custom-select" id="categorySelect"
+                formControlName="category"
+                *ngIf="categories$ | async as categories"
+                [ngClass]="{'form-control is-invalid': _category.errors?.required}">
+          <option *ngFor="let category of categories"
+                  [value]="category.categoryId">{{category.categoryName}}</option>
+        </select>
+        <span *ngIf="_category.errors?.required" class="text-danger">
+            Укажите категорию товара
+          </span>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="manufacturersSelect"> Производитель товара</label>
+        </div>
+        <select class="custom-select" id="manufacturersSelect"
+                formControlName="manufacturer"
+                *ngIf="manufacturers$ | async as manufacturers"
+                [ngClass]="{'form-control is-invalid': _manufacturer.errors?.required}">
+          <option *ngFor="let manufacturer of manufacturers"
+                  [value]="manufacturer.manufacturerId">{{manufacturer.manufacturerName}}</option>
+        </select>
+        <span *ngIf="_manufacturer.errors?.required" class="text-danger">
+            Укажите производителя товара
+          </span>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          class="btn btn-outline-info"
+          [disabled]="form.invalid || form.disabled">
+
+          Сохранить изменения
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>
