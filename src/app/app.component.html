@@ -31,18 +31,20 @@
 
 
   </div>
-  <form class="d-flex" formGroupName="loginForm" (ngSubmit)="login()">
-    <input class="form-control me-2" type="text" placeholder="email"  formControlName="email">
-    <input class="form-control me-2" type="text" placeholder="password"
-           formControlName="password">
+  <form class="d-flex" [formGroup]="loginForm" (ngSubmit)="login()" *ngIf="!isAuth else logoutBtn"  >
+    <input class="form-control me-2" type="email"  placeholder="email"  formControlName="userLogin">
+    <input class="form-control me-2" type="password" placeholder="password" formControlName="passwordHash">
     <button class="btn btn-outline-info"
             type="submit"
             [disabled]="loginForm.invalid"
     >Login
     </button>
-
   </form>
-  <button class="btn btn-outline-info" type="submit">Logout</button>
+  <ng-template #logoutBtn>
+    <span class="text-info h4 p-2">{{userName}}</span>
+    <button class="btn btn-outline-info" type="button" (click)="logout()">Logout</button>
+  </ng-template>
+
   <button class="btn btn-outline-info" type="submit"
           routerLink="/registration">Registration
   </button>

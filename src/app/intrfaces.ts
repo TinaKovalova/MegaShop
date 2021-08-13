@@ -43,5 +43,10 @@ export interface Sale{
 export interface User{
   userName:string
   userLogin:string
-  password:string
+  userRole:number
+  passwordHash:string
+}
+export interface UserData{
+  unique_name:[]
+  role:string
 }

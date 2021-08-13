@@ -13,6 +13,8 @@ export class AppComponent implements OnInit {
   title = ''
   categories?: Category[]
   loginForm!: FormGroup
+  isAuth=false
+  userName=''
 
 
   constructor(private categoryService: CategoryService,
@@ -22,10 +24,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: [null, [Validators.required]],
-      password: [null, [Validators.required]]
+      userLogin: [null, [Validators.required]],
+      passwordHash: [null, [Validators.required]]
     })
   }
+
 
 
   getAllCategories() {
@@ -36,12 +39,23 @@ export class AppComponent implements OnInit {
   login() {
     this.loginForm.disable()
     this.authService.login(this.loginForm.value).subscribe(
-      () => console.log('Login'),
+      () => {
+        console.log('Login',this.authService.getToken())
+        this.userName=this.authService.userData.unique_name.shift()
+        this.isAuth=this.authService.isAuth()
+        this.loginForm.reset()
+      },
       error => {
         console.warn(error)
         this.loginForm.enable()
       }
     )
 
+  }
+
+  logout() {
+    this.authService.logout()
+    this.isAuth=this.authService.isAuth()
+    console.log('logout')
   }
 }

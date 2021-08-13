@@ -8,37 +8,37 @@ import {AuthService} from "../services/auth.service";
   styleUrls: ['./registration-page.component.css']
 })
 export class RegistrationPageComponent implements OnInit {
-  form!:FormGroup
+  regForm!:FormGroup
   isRegister=false
   constructor(private fb:FormBuilder,
               private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.form=this.fb.group({
-      name:[null,Validators.required],
-      email:[null,[Validators.required,Validators.email]],
-      password:[null,[Validators.required, Validators.minLength(8),Validators.maxLength(20)]]
+    this.regForm=this.fb.group({
+      userName:[null,Validators.required],
+      userLogin:[null,[Validators.required,Validators.email]],
+      passwordHash:[null,[Validators.required, Validators.minLength(8),Validators.maxLength(20)]]
     })
   }
-  get _name() {
-    return this.form.get('name')!
+  get _userName() {
+    return this.regForm.get('userName')!
   }
-  get _email() {
-    return this.form.get('email')!
+  get _userLogin() {
+    return this.regForm.get('userLogin')!
   }
-  get _password(){
-    return this.form.get('password')!
+  get _passwordHash(){
+    return this.regForm.get('passwordHash')!
   }
   onSubmit() {
-    this.form.disable()
-    this.authService.register(this.form.value).subscribe(
+    this.regForm.disable()
+    this.authService.register(this.regForm.value).subscribe(
       ()=>{
-        console.log('Register')
+        console.log('Register',this.regForm.value)
         this.isRegister=true
       },
       error => {
-        console.warn(error)
-        this.form.enable()
+        console.warn(error, this.regForm.value)
+        this.regForm.enable()
 
       }
     )
