@@ -52,8 +52,7 @@ export class ManufacturerFormComponent  implements OnInit{
   onSubmit() {
     let sub$
     if(this.isNew){
-      // sub$=this.manufacturerService.add(this.form.value.name)
-      sub$=this.manufacturerService.add(this.form.value.name)
+       sub$=this.manufacturerService.add(this.form.value.name)
     }else {
       sub$=this.manufacturerService.update(this.manufacturer.manufacturerId,this.form.value.name)
     }

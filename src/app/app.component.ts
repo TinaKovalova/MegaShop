@@ -3,6 +3,7 @@ import {CategoryService} from "./services/category.service";
 import {Category} from "./intrfaces";
 import {AuthService} from "./services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {GoodsService} from "./services/goods.service";
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,16 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class AppComponent implements OnInit {
   title = ''
-  categories?: Category[]
+  categories!: Category[]
+
   loginForm!: FormGroup
   isAuth=false
   userName=''
+  userRole=''
 
 
   constructor(private categoryService: CategoryService,
+              private goodsService:GoodsService,
               private authService: AuthService,
               private fb: FormBuilder) {
   }
@@ -42,6 +46,7 @@ export class AppComponent implements OnInit {
       () => {
         console.log('Login',this.authService.getToken())
         this.userName=this.authService.userData.unique_name.shift()
+        this.userRole=this.authService.userData.role
         this.isAuth=this.authService.isAuth()
         this.loginForm.reset()
       },
@@ -55,6 +60,7 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.authService.logout()
+    this.userName=''
     this.isAuth=this.authService.isAuth()
     console.log('logout')
   }

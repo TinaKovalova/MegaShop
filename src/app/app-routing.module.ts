@@ -12,13 +12,14 @@ import {GoodsViewComponent} from "./goods-view/goods-view.component";
 import {CategoryFormComponent} from "./category-form/category-form.component";
 import {GoodsFormComponent} from "./goods-form/goods-form.component";
 import {RegistrationPageComponent} from "./registration-page/registration-page.component";
+import {AuthGuard} from "./auth.guard";
 
 const routes: Routes = [
   {path:'home', component:HomePageComponent},
   {path:'catalog', component:CatalogPageComponent},
   {path:'catalog/:id', component:GoodsViewComponent },
   {path:'order',component:OrderPageComponent},
-  {path:'admin', component:AdminPageComponent, children:[
+  {path:'admin', component:AdminPageComponent, canActivate:[AuthGuard], children:[
       {path:'goods', component:GoodsComponent},
       {path:'goods/new', component:GoodsFormComponent},
       {path:'goods/:id', component:GoodsFormComponent},

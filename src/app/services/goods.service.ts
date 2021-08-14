@@ -18,6 +18,7 @@ export class GoodsService {
   getById(id:number):Observable<Goods>{
     return this.http.get<Goods>(`${this.baseUrl}/${id}`)
   }
+
   add(goodName:string, price:number, categoryId:number, manufacturerId:number):Observable<Goods>{
     return this.http.post<Goods>(this.baseUrl, {goodName,price,categoryId,manufacturerId})
   }
