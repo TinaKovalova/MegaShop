@@ -17,8 +17,8 @@ export class GoodsFormComponent implements OnInit {
   isNew=true
   form!:FormGroup
   product!:Goods
-  categories$?:Observable<Category[]>
-  manufacturers$?:Observable<Manufacturer[]>
+  categories$!:Observable<Category[]>
+  manufacturers$!:Observable<Manufacturer[]>
 
 
   constructor(private route:ActivatedRoute,

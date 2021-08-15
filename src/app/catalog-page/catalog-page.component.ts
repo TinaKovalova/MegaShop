@@ -4,6 +4,8 @@ import {ManufacturerService} from "../services/manufacturer.service";
 import {Goods, Manufacturer} from "../intrfaces";
 import {ActivatedRoute} from "@angular/router";
 import {OrderService} from "../services/order.service";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
 
 
 @Component({
@@ -14,11 +16,11 @@ import {OrderService} from "../services/order.service";
 })
 export class CatalogPageComponent implements OnInit {
 
-  manufacturers: Manufacturer[] = []
-  goods: Goods[] = []
+  manufacturers$!: Observable<Manufacturer[]>
+  goods$!: Observable<Goods[]>
   categoryId: number | undefined
   manufacturerIds: number[] = []
-  findString!: string
+  searchString!: string
 
   constructor(private goodService: GoodsService,
               private manufacturerService: ManufacturerService,
@@ -28,27 +30,24 @@ export class CatalogPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllGoods()
-    this.getAllManufacturers()
-    console.log(this.findString)
+    this.manufacturers$ = this.manufacturerService.getAll()
+    console.log(this.searchString)
   }
 
   getAllGoods() {
     this.router.queryParams.subscribe(params => {
       this.categoryId = +params.category
-
-      this.goodService.getAll().subscribe(goods => {
-        if (!this.manufacturerIds.length) {
-          this.goods = goods.filter(g => g.categoryId == this.categoryId)
-        } else {
-          this.goods = (goods.filter(g => g.categoryId == this.categoryId)).filter(g => this.manufacturerIds.includes(g.manufacturerId))
-        }
-        console.log('getAllGoods', this.goods)
-      })
+      this.goods$ = this.goodService.getAll().pipe(
+        map(goods => {
+          if (!this.manufacturerIds.length) {
+            return goods.filter(g => g.categoryId == this.categoryId)
+          } else {
+            return goods.filter(g => g.categoryId == this.categoryId)
+              .filter(good => this.manufacturerIds.includes(good.manufacturerId))
+          }
+        })
+      )
     })
-  }
-
-  getAllManufacturers() {
-    this.manufacturerService.getAll().subscribe(manufacturers => this.manufacturers = manufacturers)
   }
 
   sortByManufacturer(id: number) {
@@ -64,5 +63,18 @@ export class CatalogPageComponent implements OnInit {
 
   buy(product: Goods) {
     this.orderService.addProduct(product)
+  }
+
+  onSearch() {
+    if (this.searchString != '') {
+      this.goods$ = this.goods$
+        .pipe(map(good => good.filter(item => item.goodName.toLowerCase().includes(this.searchString.toLowerCase()))))
+    }
+  }
+
+  onClearSearch($event: Event) {
+    if((<HTMLInputElement>$event.target).value===''){
+      this.getAllGoods()
+    }
   }
 }
