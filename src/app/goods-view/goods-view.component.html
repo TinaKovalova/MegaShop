@@ -5,22 +5,47 @@
     >Назад
     </button>
   </div>
+
   <div class="row g-0">
     <div class="col-lg-6">
-      <img src="https://www.nix.ru/art/pic/web_news/2014/mar/ps1396003354.jpg"
-           class="img-fluid rounded-start"
-           alt="...">
+
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" *ngIf="photos.length>0; else photoLoading">
+        <div class="carousel-inner caruselImg">
+          <div class="carousel-item active ">
+            <img [src]="photos[0].photoPath" style="width:35rem;height: 35rem;object-fit: cover;" alt="...">
+          </div>
+          <div class="carousel-item"  style="width:35rem;height: 35rem;object-fit: cover;"  *ngFor="let photo of photos | slice: 1" >
+            <img [src]="photo.photoPath" class="d-block" alt="...">
+          </div>
+
+        </div>
+        <button class="carousel-control-prev text-dark" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon text-dark" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next text-dark" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <ng-template #photoLoading>
+        <div class="d-flex align-items-center">
+          <strong>Загрузка изображений...</strong>
+          <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+        </div>
+      </ng-template>
     </div>
+
     <div class="col-md-6">
       <div class="card-body">
         <h4 class="card-title">{{goods.goodName}}</h4>
-        <!--        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>-->
         <p class="card-text font-weight-bold text-danger">{{goods.price}} грн.</p>
         <button class="btn btn-dark" (click)="onBuy()">Купить</button>
       </div>
     </div>
   </div>
 </div>
+
 <ng-template #loader>
   <div class="d-flex align-items-center">
     <strong>Загрузка...</strong>

@@ -50,3 +50,8 @@ export interface UserData{
   unique_name:[]
   role:string
 }
+export interface Photo{
+  photoId:number
+  goodId:number
+  photoPath:string
+}
