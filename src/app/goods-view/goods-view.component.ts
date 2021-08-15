@@ -12,7 +12,7 @@ import {OrderService} from "../services/order.service";
 export class GoodsViewComponent implements OnInit {
 
   goods!:Goods
-  prevPath=''
+  queryParam!:string | null
   constructor(private route:ActivatedRoute,
               private router:Router,
               private goodService:GoodsService,
@@ -21,7 +21,7 @@ export class GoodsViewComponent implements OnInit {
   ngOnInit(): void {
 
     this.route.queryParams.subscribe(queryParams=>{
-      this.prevPath='/catalog?category='+queryParams.category
+      this.queryParam=queryParams.category
       console.log("route",this.route)
     })
 
@@ -34,7 +34,12 @@ export class GoodsViewComponent implements OnInit {
   }
 
   onBack(categoryId: number) {
-    this.router.navigate(['/catalog?category=]',categoryId])
+    if(this.queryParam!=null){
+      this.router.navigate(['/catalog'],{queryParams:{category:categoryId}})
+    }else {
+      this.router.navigate(['/home'])
+    }
+
 
   }
 }

@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   isAuth=false
   userName=''
   userRole=''
+  authError!:string|null
 
 
   constructor(private categoryService: CategoryService,
@@ -32,6 +33,13 @@ export class AppComponent implements OnInit {
       passwordHash: [null, [Validators.required]]
     })
   }
+  get _userLogin() {
+    return this.loginForm.get('userLogin')!
+  }
+  get _passwordHash() {
+    return this.loginForm.get('passwordHash')!
+  }
+
 
 
 
@@ -48,10 +56,11 @@ export class AppComponent implements OnInit {
         this.userName=this.authService.userData.unique_name.shift()
         this.userRole=this.authService.userData.role
         this.isAuth=this.authService.isAuth()
-        this.loginForm.reset()
+        this.authError=null
       },
       error => {
         console.warn(error)
+        this.authError='Неверно указан логин или пароль'
         this.loginForm.enable()
       }
     )
@@ -62,6 +71,7 @@ export class AppComponent implements OnInit {
     this.authService.logout()
     this.userName=''
     this.isAuth=this.authService.isAuth()
+
     console.log('logout')
   }
 }
