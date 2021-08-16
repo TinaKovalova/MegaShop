@@ -23,8 +23,7 @@ export class AuthService {
           localStorage.setItem('authToken', token)
           this.setToken(token)
           this.userData = this.getUserData(token)
-          console.log(this.userData)
-        }
+          }
       )
     )
   }

@@ -18,6 +18,7 @@ import { CategoryFormComponent } from './category-form/category-form.component';
 import { ManufacturerFormComponent } from './manufacturer-form/manufacturer-form.component';
 import { GoodsFormComponent } from './goods-form/goods-form.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
+import { GoodsCardComponent } from './goods-card/goods-card.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { RegistrationPageComponent } from './registration-page/registration-page
     CategoryFormComponent,
     ManufacturerFormComponent,
     GoodsFormComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    GoodsCardComponent
   ],
   imports: [
     BrowserModule,

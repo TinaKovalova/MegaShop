@@ -41,7 +41,7 @@
   <p>
     <button class="btn btn-outline-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample"
-            [disabled]="order.length==0">
+            [disabled]="order.length==0" (click)="isLogin()">
       Оформить заказ
     </button>
   </p>

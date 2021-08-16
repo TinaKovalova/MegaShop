@@ -14,21 +14,16 @@ import {PhotoService} from "../services/photo.service";
 export class HomePageComponent implements OnInit {
 
   goods$!: Observable<Goods[]>
-  titlePhotos!:Photo[]
   searchString = ''
 
-  constructor(private goodsService: GoodsService,
-              private photoService:PhotoService) {
-  }
+  constructor(private goodsService: GoodsService) {}
 
   ngOnInit(): void {
     this.goods$ = this.goodsService.getAll()
-
   }
 
   onSearch() {
     if (this.searchString != '') {
-
       this.goods$ = this.goodsService.getAll()
         .pipe(
           map(good => good.filter(item => item.goodName.toLowerCase().includes(this.searchString.toLowerCase()))))

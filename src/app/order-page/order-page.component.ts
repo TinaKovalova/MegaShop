@@ -54,4 +54,12 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
 
+  isLogin() {
+    if(localStorage.getItem('login')){
+      this.form.get('email')?.setValue(localStorage.getItem('login'))
+    }else {
+      this.form.get('email')?.setValue(null)
+    }
+
+  }
 }

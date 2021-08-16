@@ -1,11 +1,15 @@
-.caruselImg{
-  height: 35rem;
-  width:45rem;
-  border-color: blue;
-  border-style: dashed;
-  align-items: center;
-  background-color: cadetblue;
-  justify-content: center;
+.carousel-imgDiv{
   position: relative;
-
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position:100%;
+  width:580px;
+  height: 580px;
+}
+img{
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  display: block;
 }

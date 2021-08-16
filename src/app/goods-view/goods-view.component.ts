@@ -27,7 +27,7 @@ export class GoodsViewComponent implements OnInit {
 
     this.route.queryParams.subscribe(queryParams=>{
       this.queryParam=queryParams.category
-      console.log("route",this.route)
+
     })
     this.route.params.subscribe(params=>
       this.goodService.getById(+params.id).subscribe(g=>{

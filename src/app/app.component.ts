@@ -15,32 +15,29 @@ export class AppComponent implements OnInit {
   categories!: Category[]
 
   loginForm!: FormGroup
-  isAuth=false
-  userName=''
-  userRole=''
-  authError!:string|null
+  isAuth = false
+  userName = ''
+  userRole = ''
+  authError!: string | null
 
 
   constructor(private categoryService: CategoryService,
-              private goodsService:GoodsService,
+              private goodsService: GoodsService,
               private authService: AuthService,
               private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.loginForm = this.fb.group({
-      userLogin: [null, [Validators.required]],
-      passwordHash: [null, [Validators.required]]
-    })
+   this.initForm()
   }
+
   get _userLogin() {
     return this.loginForm.get('userLogin')!
   }
+
   get _passwordHash() {
     return this.loginForm.get('passwordHash')!
   }
-
-
 
 
   getAllCategories() {
@@ -52,15 +49,17 @@ export class AppComponent implements OnInit {
     this.loginForm.disable()
     this.authService.login(this.loginForm.value).subscribe(
       () => {
-        console.log('Login',this.authService.getToken())
-        this.userName=this.authService.userData.unique_name.shift()
-        this.userRole=this.authService.userData.role
-        this.isAuth=this.authService.isAuth()
-        this.authError=null
+        console.log('token ', this.authService.getToken())
+        this.userName = this.authService.userData.unique_name.shift()
+        let login = this.authService.userData.unique_name.reverse().shift()
+        localStorage.setItem('login', login)
+        this.userRole = this.authService.userData.role
+        this.isAuth = this.authService.isAuth()
+        this.authError = null
       },
       error => {
         console.warn(error)
-        this.authError='Неверно указан логин или пароль'
+        this.authError = 'Неверно указан логин или пароль'
         this.loginForm.enable()
       }
     )
@@ -68,10 +67,18 @@ export class AppComponent implements OnInit {
   }
 
   logout() {
+
     this.authService.logout()
-    this.userName=''
-    this.isAuth=this.authService.isAuth()
+    this.userName = ''
+    this.isAuth = this.authService.isAuth()
+    this.initForm()
 
     console.log('logout')
+  }
+  initForm(){
+    this.loginForm=this.fb.group({
+      userLogin: [null, [Validators.required]],
+      passwordHash: [null, [Validators.required]]
+    })
   }
 }
