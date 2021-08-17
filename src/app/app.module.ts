@@ -8,7 +8,7 @@ import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { OrderPageComponent } from './order-page/order-page.component';
 import {RouterModule} from "@angular/router";
 import { AdminPageComponent } from './admin-page/admin-page.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import { GoodsComponent } from './goods/goods.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { CategoryComponent } from './category/category.component';
@@ -19,6 +19,7 @@ import { ManufacturerFormComponent } from './manufacturer-form/manufacturer-form
 import { GoodsFormComponent } from './goods-form/goods-form.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { GoodsCardComponent } from './goods-card/goods-card.component';
+import {TokenInterceptor} from "./token.interceptor";
 
 @NgModule({
   declarations: [
@@ -46,7 +47,13 @@ import { GoodsCardComponent } from './goods-card/goods-card.component';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide:HTTP_INTERCEPTORS,
+      multi:true,
+      useClass:TokenInterceptor
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

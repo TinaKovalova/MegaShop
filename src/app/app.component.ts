@@ -28,6 +28,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let token=localStorage.getItem('authToken')
+    if(token!==null){
+      this.authService.setToken(token)
+    }
    this.initForm()
   }
 

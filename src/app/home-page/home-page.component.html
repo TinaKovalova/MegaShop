@@ -8,14 +8,14 @@
                aria-label="Search"
                [(ngModel)]="searchString"
                (input)="onClearSearch($event)">
-        <button class="btn btn-outline-info" type="submit" (click)="onSearch()">Search</button>
+        <button class="btn btn-outline-info bg-light" type="submit" (click)="onSearch()">Search</button>
       </div>
     </div>
     <div class="row container ">
       <div class="col align-self-center">
         <div class="d-flex flex-row flex-wrap" *ngIf="goods$ | async as goods; else loading">
           <app-goods-card
-            class="card m-2 p-1"
+            class="card m-5  shadow p-3 mb-5 bg-body rounded"
             style="width: 15rem;"
             *ngFor="let g of goods"
             [product]="g">

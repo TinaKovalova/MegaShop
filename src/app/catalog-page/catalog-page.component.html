@@ -9,21 +9,22 @@
                aria-label="Search"
                (input)="onClearSearch($event)"
                [(ngModel)]="searchString">
-        <button class="btn btn-outline-info"
+        <button class="btn btn-outline-info bg-light"
                 type="button"
                 (click)="onSearch()"
-        >Search</button>
+        >Search
+        </button>
       </div>
 
       <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="flush-headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            <button class="accordion-button collapsed text-dark" type="button" data-bs-toggle="collapse"
                     data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
               Производитель
             </button>
           </h2>
-          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne"
+          <div id="flush-collapseOne" class="accordion-collapse collapse bg-light" aria-labelledby="flush-headingOne"
                data-bs-parent="#accordionFlushExample">
             <div class="accordion-body " *ngIf="manufacturers$ | async as manufacturers">
               <div class="form-check" *ngFor="let m of manufacturers">
@@ -46,30 +47,29 @@
           <h4>Нет товаров соответствующих параметрам поиска &#9785;</h4>
         </div>
         <app-goods-card
-          class="card m-2 p-1"
+          class="card m-5  shadow p-3 mb-5 bg-body rounded"
           style="width: 15rem;"
           *ngFor="let g of goods"
           [product]="g"
           [queryParams]="{category:categoryId}">
         </app-goods-card>
 
-<!--        <div class="card m-2 p-2" style="width: 18rem"-->
-<!--             *ngFor="let product of goods">-->
-<!--          <a [routerLink]="['/catalog',product.goodId]"-->
-<!--             [queryParams]="{category:categoryId}">-->
-<!--            <img src="https://www.nix.ru/art/pic/web_news/2014/mar/ps1396003354.jpg" class="card-img-top"-->
-<!--                 alt="goods photo">-->
-<!--          </a>-->
-<!--          <div class="card-body ">-->
-<!--            <h5 class="card-title">{{product.goodName}}</h5>-->
-<!--            <p class="card-text">{{product.price}}</p>-->
-<!--            <button type="button"-->
-<!--                    class="btn btn-dark"-->
-<!--                    (click)="buy(product)">Купить-->
-<!--            </button>-->
-<!--          </div>-->
-<!--        </div>-->
-
+        <!--        <div class="card m-2 p-2" style="width: 18rem"-->
+        <!--             *ngFor="let product of goods">-->
+        <!--          <a [routerLink]="['/catalog',product.goodId]"-->
+        <!--             [queryParams]="{category:categoryId}">-->
+        <!--            <img src="https://www.nix.ru/art/pic/web_news/2014/mar/ps1396003354.jpg" class="card-img-top"-->
+        <!--                 alt="goods photo">-->
+        <!--          </a>-->
+        <!--          <div class="card-body ">-->
+        <!--            <h5 class="card-title">{{product.goodName}}</h5>-->
+        <!--            <p class="card-text">{{product.price}}</p>-->
+        <!--            <button type="button"-->
+        <!--                    class="btn btn-dark"-->
+        <!--                    (click)="buy(product)">Купить-->
+        <!--            </button>-->
+        <!--          </div>-->
+        <!--        </div>-->
 
 
       </div>
