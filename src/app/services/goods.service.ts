@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Goods} from "../intrfaces";
 import {Observable} from "rxjs";
+import {SHOP_URL} from "./SHOP_URL";
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import {Observable} from "rxjs";
 })
 export class GoodsService {
 
-  baseUrl='https://localhost:44376/good'
+  baseUrl=SHOP_URL+'/good'
   constructor( private http:HttpClient) { }
 
   getAll(): Observable<Goods[]>{

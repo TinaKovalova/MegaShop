@@ -1,7 +1,7 @@
 <div class="p-2">
   <div class="page-title">
     <h5>
-      <a routerLink="/admin/goods">Товар</a>
+      <a routerLink="/admin/goods">Товар ></a>
       {{isNew ? 'Добавление' : 'Редактирование'}} товара
     </h5>
 
@@ -10,7 +10,7 @@
   <div class="row">
     <form class="col-6 p-2" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="input-group mb-3 ">
-        <label for="name" class="input-group-text">Название</label>
+        <label for="name" class="input-group-text  w-25">Название</label>
         <input id="name"
                type="text"
                placeholder="Название товара"
@@ -29,7 +29,7 @@
         </span>
       </div>
       <div class="input-group mb-3">
-        <label for="price" class="input-group-text">Цена</label>
+        <label for="price" class="input-group-text  w-25">Цена</label>
         <input id="price"
                type="number"
                placeholder="Цена товара"
@@ -42,7 +42,7 @@
       </div>
 
       <div class="input-group mb-3">
-        <div class="input-group-prepend">
+        <div class="input-group-prepend w-25">
           <label class="input-group-text" for="categorySelect"> Категория товара</label>
         </div>
         <select class="custom-select" id="categorySelect"
@@ -58,8 +58,8 @@
       </div>
 
       <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text" for="manufacturersSelect"> Производитель товара</label>
+        <div class="input-group-prepend w-25">
+          <label class="input-group-text " for="manufacturersSelect"> Производитель товара</label>
         </div>
         <select class="custom-select" id="manufacturersSelect"
                 formControlName="manufacturer"

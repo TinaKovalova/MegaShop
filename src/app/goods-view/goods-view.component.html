@@ -1,21 +1,24 @@
 <div class=" container-fluid" *ngIf="goods else loader">
-  <div class="row">
-    <button class="btn btn-outline-info"
+  <div class="row pt-1 ">
+    <button class="btn btn-outline-info btn-sm "
             (click)="onBack(goods.categoryId)"
-    >Назад
+    >&#8656;
     </button>
   </div>
 
   <div class="row g-0">
     <div class="col-lg-6">
 
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel" *ngIf="photos; else photoLoading">
-        <div class="carousel-inner ">
-          <div class="carousel-item active carousel-imgDiv" >
-            <img [src]="photos[0].photoPath" class=""  style="object-fit: cover;" alt="...">
+      <div id="carouselExampleControls"
+           class="carousel slide  rounded-sm mt-2 h-75"
+           data-bs-ride="carousel"
+           *ngIf="photos; else photoLoading">
+        <div class="carousel-inner  shadow p-1 mb-1 bg-body rounded  ">
+          <div class="carousel-item active carousel-imgDiv w-100 " >
+            <img [src]="photos[0].photoPath" class="d-flex w-auto position-relative rounded mx-auto d-block"  style="object-fit: cover;" alt="...">
           </div>
-          <div class="carousel-item carousel-imgDiv"   *ngFor="let photo of photos | slice: 1" >
-            <img [src]="photo.photoPath" class="" style="object-fit: cover;" alt="...">
+          <div class="carousel-item carousel-imgDiv w-100 "   *ngFor="let photo of photos | slice: 1" >
+            <img [src]="photo.photoPath" class="d-flex w-auto position-relative rounded mx-auto d-block " style="object-fit: cover;" alt="...">
           </div>
 
         </div>
@@ -37,12 +40,16 @@
     </div>
 
     <div class="col-md-6">
-      <div class="card-body">
+       <div class="card-body">
         <h4 class="card-title">{{goods.goodName}}</h4>
         <p class="card-text font-weight-bold text-danger">{{goods.price}} грн.</p>
-        <button class="btn btn-dark" (click)="onBuy()">Купить</button>
+        <button class="btn btn-dark" (click)="onBuy()">Купить
+          <span *ngIf="count>0" class="badge bg-secondary">В корзине {{count}} шт</span>
+        </button>
       </div>
+
     </div>
+
   </div>
 </div>
 

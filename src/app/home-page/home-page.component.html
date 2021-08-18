@@ -14,6 +14,9 @@
     <div class="row container ">
       <div class="col align-self-center">
         <div class="d-flex flex-row flex-wrap" *ngIf="goods$ | async as goods; else loading">
+          <div *ngIf="goods.length==0" class="m-5 shadow p-3 mb-5 bg-body rounded mx-auto">
+            <h4>Нет товаров соответствующих параметрам поиска &#9785;</h4>
+          </div>
           <app-goods-card
             class="card m-5  shadow p-3 mb-5 bg-body rounded"
             style="width: 15rem;"

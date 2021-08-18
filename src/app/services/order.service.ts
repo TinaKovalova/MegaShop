@@ -38,4 +38,28 @@ export class OrderService {
       return s+=item.countGood*item.summa
     },0)
   }
+  getCountProductById(id:number):number{
+    let product=this.getSalePositionByID(id)
+    return product? product.countGood:0
+  }
+  getSalePositionByID(id:number):SalePosition | null{
+    let product=this.order.find(product=>product.goodId==id)
+    return product!==undefined?product:null
+
+  }
+  increaseCount(id:number){
+    let position=this.getSalePositionByID(id)
+    if(position){
+      position.countGood++
+      this.computeSum()
+    }
+
+  }
+  decreaseCount(id:number){
+    let position=this.getSalePositionByID(id)
+    if(position && position.countGood!==1){
+      position.countGood--
+    }
+    this.computeSum()
+  }
 }

@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Manufacturer} from "../intrfaces";
+import {SHOP_URL} from "./SHOP_URL";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ManufacturerService {
-  baseUrl='https://localhost:44376/manufacturer'
+  baseUrl=SHOP_URL+'/manufacturer'
   constructor(private http:HttpClient) { }
   getAll():Observable<Manufacturer[]>{
     return this.http.get<Manufacturer[]>(this.baseUrl)

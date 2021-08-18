@@ -5,6 +5,7 @@ import {AuthService} from "./services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GoodsService} from "./services/goods.service";
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -28,8 +29,12 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    console.log('app onInit localStorage.getItem(\'authToken\')', localStorage)
     let token=localStorage.getItem('authToken')
     if(token!==null){
+      this.isAuth=true
+      this.userName =localStorage.getItem('user_name') as string
       this.authService.setToken(token)
     }
    this.initForm()
@@ -54,9 +59,7 @@ export class AppComponent implements OnInit {
     this.authService.login(this.loginForm.value).subscribe(
       () => {
         console.log('token ', this.authService.getToken())
-        this.userName = this.authService.userData.unique_name.shift()
-        let login = this.authService.userData.unique_name.reverse().shift()
-        localStorage.setItem('login', login)
+        this.userName =localStorage.getItem('user_name') as string
         this.userRole = this.authService.userData.role
         this.isAuth = this.authService.isAuth()
         this.authError = null
