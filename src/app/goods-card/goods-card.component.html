@@ -1,0 +1,16 @@
+<div class="img-div">
+  <a [routerLink]="['/catalog',product.goodId]"
+      [queryParams]="queryParams">
+    <img [src]="titlePhoto"
+         class="card-img-top"
+
+         alt="goods photo">
+  </a>
+</div>
+<div class="card-body ">
+  <h5 class="card-title">{{product.goodName}}</h5>
+
+</div>
+<div class="text-center text-danger font-weight-bold mt-2">
+  <p class="card-text">{{product.price}} грн.</p>
+</div>
