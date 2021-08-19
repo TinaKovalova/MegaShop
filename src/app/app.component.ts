@@ -4,6 +4,7 @@ import {Category} from "./intrfaces";
 import {AuthService} from "./services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GoodsService} from "./services/goods.service";
+import { Router} from "@angular/router";
 
 
 @Component({
@@ -25,6 +26,7 @@ export class AppComponent implements OnInit {
   constructor(private categoryService: CategoryService,
               private goodsService: GoodsService,
               private authService: AuthService,
+              private router:Router,
               private fb: FormBuilder) {
   }
 
@@ -79,6 +81,7 @@ export class AppComponent implements OnInit {
     this.userName = ''
     this.isAuth = this.authService.isAuth()
     this.initForm()
+    this.router.navigate(['/home'])
 
     console.log('logout')
   }

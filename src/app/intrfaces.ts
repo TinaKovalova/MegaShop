@@ -51,7 +51,7 @@ export interface UserData{
   role:string
 }
 export interface Photo{
-  photoId:number
-  goodId:number
+  photoId?:number
+  goodId?:number
   photoPath:string
 }

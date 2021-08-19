@@ -18,11 +18,11 @@ export class PhotoService {
   getById(id:number):Observable<Photo>{
     return this.http.get<Photo>(`${this.baseUrl}/${id}`)
   }
-  add(photoPath:string,goodId?:number):Observable<Photo>{
-    return this.http.post<Photo>(this.baseUrl, {photoPath,goodId})
+  add(photoPath:string,goodId:number):Observable<Photo>{
+    return this.http.post<Photo>(this.baseUrl, {goodId, photoPath})
   }
-  update(id:number, photoPath:string,goodId?:number):Observable<Photo>{
-    return this.http.put<Photo>(`${this.baseUrl}/${id}`, {photoPath,goodId})
+  update(id:number, photoPath:string,goodId:number):Observable<Photo>{
+    return this.http.put<Photo>(`${this.baseUrl}/${id}`, {goodId,photoPath})
   }
   delete(id:number):Observable<Photo>{
     return this.http.delete<Photo>(`${this.baseUrl}/${id}`)

@@ -1,88 +1,147 @@
-<div class="p-2">
-  <div class="page-title">
+<div class=" container">
+  <div class="page-title row">
     <h5>
       <a routerLink="/admin/goods">Товар ></a>
       {{isNew ? 'Добавление' : 'Редактирование'}} товара
     </h5>
-
   </div>
+  <div class="row d-flex flex-wrap align-content-md-around ">
+    <div class="col-md-6  col-sm-12  border border-dark rounded-sm p-2 py-1">
+      <div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="input-group mb-3 ">
+            <label for="name" class="input-group-text  w-25">Название</label>
+            <input id="name"
+                   class="w-75"
+                   type="text"
+                   placeholder="Название товара"
+                   aria-label="Название товара"
+                   formControlName="name"
+                   [ngClass]="{'form-control is-invalid': _name.errors?.required && (_name.touched || _name.dirty)}">
 
-  <div class="row">
-    <form class="col-6 p-2" [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="input-group mb-3 ">
-        <label for="name" class="input-group-text  w-25">Название</label>
-        <input id="name"
-               type="text"
-               placeholder="Название товара"
-               aria-label="Название товара"
-               formControlName="name"
-               [ngClass]="{'form-control is-invalid': _name.errors?.required && (_name.touched || _name.dirty)}">
-
-        <span *ngIf="_name.errors?.required && (_name.touched || _name.dirty)" class="text-danger">
+            <span *ngIf="_name.errors?.required && (_name.touched || _name.dirty)" class="text-danger">
             Введите название товара
         </span>
-        <span>
-        <button class="btn btn-outline-secondary ml-2"
-                (click)="onDelete(product.goodId)">
-          <i>Удалить</i>
-        </button>
-        </span>
-      </div>
-      <div class="input-group mb-3">
-        <label for="price" class="input-group-text  w-25">Цена</label>
-        <input id="price"
-               type="number"
-               placeholder="Цена товара"
-               aria-label="Цена товара"
-               formControlName="price"
-               [ngClass]="{'form-control is-invalid': _price.errors?.required && (_price.touched || _price.dirty)}">
-        <span *ngIf="_price.errors?.required && (_price.touched || _price.dirty)" class="text-danger">
+
+          </div>
+          <div class="input-group mb-3">
+            <label for="price" class="input-group-text  w-25">Цена</label>
+            <input id="price"
+                   class="w-75"
+                   type="number"
+                   placeholder="Цена товара"
+                   aria-label="Цена товара"
+                   formControlName="price"
+                   [ngClass]="{'form-control is-invalid': _price.errors?.required && (_price.touched || _price.dirty)}">
+            <span *ngIf="_price.errors?.required && (_price.touched || _price.dirty)" class="text-danger">
             Укажите цену товара
         </span>
-      </div>
-
-      <div class="input-group mb-3">
-        <div class="input-group-prepend w-25">
-          <label class="input-group-text" for="categorySelect"> Категория товара</label>
-        </div>
-        <select class="custom-select" id="categorySelect"
-                formControlName="category"
-                *ngIf="categories$ | async as categories"
-                [ngClass]="{'form-control is-invalid': _category.errors?.required}">
-          <option *ngFor="let category of categories"
-                  [value]="category.categoryId">{{category.categoryName}}</option>
-        </select>
-        <span *ngIf="_category.errors?.required" class="text-danger">
+          </div>
+          <div class="d-inline-flex">
+            <div class="input-group mb-3 w-75">
+              <div class="input-group-prepend ">
+                <label class="input-group-text" for="categorySelect"> Категория</label>
+              </div>
+              <select class="custom-select" id="categorySelect"
+                      formControlName="category"
+                      *ngIf="categories$ | async as categories"
+                      [ngClass]="{'form-control is-invalid': _category.errors?.required}">
+                <option *ngFor="let category of categories"
+                        [value]="category.categoryId">{{category.categoryName}}</option>
+              </select>
+              <span *ngIf="_category.errors?.required" class="text-danger">
             Укажите категорию товара
           </span>
-      </div>
+            </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend w-25">
-          <label class="input-group-text " for="manufacturersSelect"> Производитель товара</label>
-        </div>
-        <select class="custom-select" id="manufacturersSelect"
-                formControlName="manufacturer"
-                *ngIf="manufacturers$ | async as manufacturers"
-                [ngClass]="{'form-control is-invalid': _manufacturer.errors?.required}">
-          <option *ngFor="let manufacturer of manufacturers"
-                  [value]="manufacturer.manufacturerId">{{manufacturer.manufacturerName}}</option>
-        </select>
-        <span *ngIf="_manufacturer.errors?.required" class="text-danger">
+            <div class="input-group mb-3 w-75">
+              <div class="input-group-prepend ">
+                <label class="input-group-text " for="manufacturersSelect">Производитель</label>
+              </div>
+              <select class="custom-select " id="manufacturersSelect"
+                      formControlName="manufacturer"
+                      *ngIf="manufacturers$ | async as manufacturers"
+                      [ngClass]="{'form-control is-invalid': _manufacturer.errors?.required}">
+                <option *ngFor="let manufacturer of manufacturers"
+                        [value]="manufacturer.manufacturerId">{{manufacturer.manufacturerName}}</option>
+              </select>
+              <span *ngIf="_manufacturer.errors?.required" class="text-danger">
             Укажите производителя товара
           </span>
-      </div>
+            </div>
+          </div>
 
+          <div class="d-flex justify-content-around w-100">
+            <button
+              type="submit"
+              class="btn btn-outline-info ml-3"
+              [disabled]="form.invalid || form.disabled">
+
+              Сохранить изменения
+            </button>
+            <button class="btn btn-outline-secondary mr-3"
+                    (click)="onDelete(product.goodId)">
+              <i>Удалить товар</i>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-6  col-sm-12 border border-dark rounded-sm p-2 ">
       <div>
-        <button
-          type="submit"
-          class="btn btn-outline-info"
-          [disabled]="form.invalid || form.disabled">
+        <div class="input-group mb-3 ">
+          <label for="photo" class="input-group-text  w-25">Фото</label>
+          <input id="photo"
+                 class="w-75"
+                 type="text"
+                 placeholder="Фото товара"
+                 aria-label="Фото товара"
+                 [(ngModel)]="photoPath">
+        </div>
 
-          Сохранить изменения
-        </button>
+        <div>
+          <button
+            type="submit"
+            (click)="addPhoto()"
+            class="btn btn-outline-info"
+            [disabled]="!photoPath">
+            Добавить изображение
+          </button>
+        </div>
       </div>
-    </form>
+    </div>
+  </div>
+  <div class="row mt-2 d-flex flex-wrap align-content-between">
+    <div class=" col card mb-3 ">
+      <div class="row g-0">
+        <div class="col-md-4" style="max-width: 300px; ">
+          <img [src]="selectedPhoto.photoPath" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <div class="list-group" *ngIf="photos$ | async as photos; else loader">
+              <div class="list-group-item list-group-item-action"
+                   *ngFor="let p of photos"
+                   id="photo{{p.photoId}}"
+                   (click)="selectedPhoto=p">
+                {{p.photoPath}}
+                <button (click)="deletePhoto(p.photoId, p.goodId)" class="btn btn-outline-info btn-sm float-right">
+                  &#10008;
+                </button>
+              </div>
+            </div>
+          </div>
+          <ng-template #loader>
+            <div class="d-flex align-items-center">
+              <strong>Загрузка...</strong>
+              <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
+
+
