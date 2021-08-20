@@ -9,7 +9,6 @@
      *ngFor="let product of goods"
      [routerLink]="['/admin/goods', product.goodId]">
     <span>{{product.goodId}} {{product.goodName}}</span></a>
-
 </ul>
 <ng-template #loading>
   <div class="d-flex align-items-center">

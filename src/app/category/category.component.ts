@@ -9,13 +9,13 @@ import {Observable} from "rxjs";
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent implements OnInit {
-  categories$?:Observable<Category[]>
+  categories$?: Observable<Category[]>
 
   constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
-   this.categories$= this.categoryService.getAll()
+    this.categories$ = this.categoryService.getAll()
   }
 
 }

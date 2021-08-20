@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from '@angular/forms'
 import {switchMap} from "rxjs/operators";
@@ -12,24 +12,25 @@ import {Category} from "../intrfaces";
   styleUrls: ['./category-form.component.css']
 })
 export class CategoryFormComponent implements OnInit {
-  isNew=true
-  form!:FormGroup
-  category!:Category
+  isNew = true
+  form!: FormGroup
+  category!: Category
 
-  constructor(private route:ActivatedRoute,
-              private fb:FormBuilder,
-              private categoryService:CategoryService,
-              private router:Router) { }
+  constructor(private route: ActivatedRoute,
+              private fb: FormBuilder,
+              private categoryService: CategoryService,
+              private router: Router) {
+  }
 
   ngOnInit(): void {
 
-    this.form=this.fb.group({
-      name:[null,Validators.required]
+    this.form = this.fb.group({
+      name: [null, Validators.required]
     })
     this.form.disabled
     this.route.params.pipe(
       switchMap(
-        (params:Params)=>{
+        (params: Params) => {
           if (params['id']) {
             this.isNew = false
             return this.categoryService.getById(params['id'])
@@ -38,35 +39,34 @@ export class CategoryFormComponent implements OnInit {
         }
       )
     )
-      .subscribe(category=>{
-        if(category){
-          this.category=category
+      .subscribe(category => {
+        if (category) {
+          this.category = category
           this.form.patchValue({
-            name:category.categoryName
+            name: category.categoryName
           })
         }
         this.form.enabled
       })
-
-
   }
+
   get _name() {
     return this.form.get('name')!
   }
 
   onSubmit() {
     let sub$
-    if(this.isNew){
-      sub$=this.categoryService.add(this.form.value.name)
-    }else {
-      sub$=this.categoryService.update(this.category.categoryId,this.form.value.name)
+    if (this.isNew) {
+      sub$ = this.categoryService.add(this.form.value.name)
+    } else {
+      sub$ = this.categoryService.update(this.category.categoryId, this.form.value.name)
     }
-    sub$.subscribe( ()=>this.router.navigate(['/admin/category']))
+    sub$.subscribe(() => this.router.navigate(['/admin/category']))
   }
 
   onDelete(categoryId: number) {
     console.log('onSubmit')
     this.categoryService.delete(categoryId)
-      .subscribe(()=>this.router.navigate(['/admin/category']))
+      .subscribe(() => this.router.navigate(['/admin/category']))
   }
 }

@@ -5,28 +5,29 @@
     >&#8656;
     </button>
   </div>
-
   <div class="row g-0">
     <div class="col-lg-6">
-
       <div id="carouselExampleControls"
            class="carousel slide  rounded-sm mt-2 h-75"
            data-bs-ride="carousel"
            *ngIf="photos; else photoLoading">
-        <div class="carousel-inner  shadow p-1 mb-1 bg-body rounded  ">
-          <div class="carousel-item active carousel-imgDiv w-100 " >
-            <img [src]="photos[0].photoPath" class="d-flex w-auto position-relative rounded mx-auto d-block"  style="object-fit: cover;" alt="...">
+        <div class="carousel-inner  shadow p-1 mb-1 bg-body rounded ">
+          <div class="carousel-item active carousel-imgDiv w-100">
+            <img [src]="photos[0].photoPath" class="d-flex w-auto position-relative rounded mx-auto img-fluid d-block"
+                 alt="...">
           </div>
-          <div class="carousel-item carousel-imgDiv w-100 "   *ngFor="let photo of photos | slice: 1" >
-            <img [src]="photo.photoPath" class="d-flex w-auto position-relative rounded mx-auto d-block " style="object-fit: cover;" alt="...">
+          <div class="carousel-item carousel-imgDiv w-100 " *ngFor="let photo of photos | slice: 1">
+            <img [src]="photo.photoPath" class="d-flex w-auto position-relative rounded mx-auto d-block "
+                 style="object-fit: cover;" alt="...">
           </div>
-
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="prev">
           <span class="carousel-control-prev-icon"></span>
           <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                data-bs-slide="next">
           <span class="carousel-control-next-icon"></span>
           <span class="visually-hidden">Next</span>
         </button>
@@ -38,21 +39,17 @@
         </div>
       </ng-template>
     </div>
-
     <div class="col-md-6">
-       <div class="card-body">
+      <div class="card-body">
         <h4 class="card-title">{{goods.goodName}}</h4>
         <p class="card-text font-weight-bold text-danger">{{goods.price}} грн.</p>
         <button class="btn btn-dark" (click)="onBuy()">Купить
           <span *ngIf="count>0" class="badge bg-secondary">В корзине {{count}} шт</span>
         </button>
       </div>
-
     </div>
-
   </div>
 </div>
-
 <ng-template #loader>
   <div class="d-flex align-items-center">
     <strong>Загрузка...</strong>

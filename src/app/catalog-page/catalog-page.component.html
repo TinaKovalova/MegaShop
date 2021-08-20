@@ -5,17 +5,15 @@
       <div class="d-flex">
         <input class="form-control me-2"
                type="search"
-               placeholder="Search"
+               placeholder="Я ищу..."
                aria-label="Search"
                (input)="onClearSearch($event)"
                [(ngModel)]="searchString">
         <button class="btn btn-outline-info bg-light"
                 type="button"
-                (click)="onSearch()"
-        >Search
+                (click)="onSearch()">Поиск
         </button>
       </div>
-
       <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="flush-headingOne">
@@ -40,7 +38,6 @@
         </div>
       </div>
     </div>
-
     <div class="col-9">
       <div class="d-flex flex-row flex-wrap" *ngIf="goods$ |async as goods else loading">
         <div *ngIf="goods.length==0" class="m-5 shadow p-3 mb-5 bg-body rounded mx-auto">
@@ -53,7 +50,6 @@
           [product]="g"
           [queryParams]="{category:categoryId}">
         </app-goods-card>
-
       </div>
       <ng-template #loading>
         <div class="d-flex align-items-center">
@@ -62,8 +58,5 @@
         </div>
       </ng-template>
     </div>
-
-
   </div>
-
 </div>

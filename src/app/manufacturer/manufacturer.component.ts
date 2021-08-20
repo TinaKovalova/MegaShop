@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Manufacturer} from "../intrfaces";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {ManufacturerService} from "../services/manufacturer.service";
 
 @Component({
@@ -9,10 +9,12 @@ import {ManufacturerService} from "../services/manufacturer.service";
   styleUrls: ['./manufacturer.component.css']
 })
 export class ManufacturerComponent implements OnInit {
+  manufacturers$!: Observable<Manufacturer[]>
 
-  manufacturers$!:Observable<Manufacturer[]>
-  constructor(private manufacturerService: ManufacturerService) {}
+  constructor(private manufacturerService: ManufacturerService) {
+  }
+
   ngOnInit(): void {
-    this.manufacturers$= this.manufacturerService.getAll()
+    this.manufacturers$ = this.manufacturerService.getAll()
   }
 }

@@ -9,7 +9,6 @@
      *ngFor="let category of categories"
      [routerLink]="['/admin/category', category.categoryId]">
     <span>{{category.categoryId}} {{category.categoryName}}</span></a>
-
 </ul>
 <ng-template #loading>
   <div class="d-flex align-items-center">

@@ -4,7 +4,7 @@ import {Category} from "./intrfaces";
 import {AuthService} from "./services/auth.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {GoodsService} from "./services/goods.service";
-import { Router} from "@angular/router";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -15,31 +15,28 @@ import { Router} from "@angular/router";
 export class AppComponent implements OnInit {
   title = ''
   categories!: Category[]
-
   loginForm!: FormGroup
   isAuth = false
   userName = ''
   userRole = ''
   authError!: string | null
 
-
   constructor(private categoryService: CategoryService,
               private goodsService: GoodsService,
               private authService: AuthService,
-              private router:Router,
+              private router: Router,
               private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-
-    console.log('app onInit localStorage.getItem(\'authToken\')', localStorage)
-    let token=localStorage.getItem('authToken')
-    if(token!==null){
-      this.isAuth=true
-      this.userName =localStorage.getItem('user_name') as string
+    let token = localStorage.getItem('authToken')
+    if (token !== null) {
+      this.isAuth = true
       this.authService.setToken(token)
+      this.userName = localStorage.getItem('user_name') as string
+      this.userRole = localStorage.getItem('user_role') as string
     }
-   this.initForm()
+    this.initForm()
   }
 
   get _userLogin() {
@@ -50,19 +47,16 @@ export class AppComponent implements OnInit {
     return this.loginForm.get('passwordHash')!
   }
 
-
   getAllCategories() {
     this.categoryService.getAll().subscribe(categories => this.categories = categories)
   }
-
 
   login() {
     this.loginForm.disable()
     this.authService.login(this.loginForm.value).subscribe(
       () => {
-        console.log('token ', this.authService.getToken())
-        this.userName =localStorage.getItem('user_name') as string
-        this.userRole = this.authService.userData.role
+        this.userName = localStorage.getItem('user_name') as string
+        this.userRole = localStorage.getItem('user_role') as string
         this.isAuth = this.authService.isAuth()
         this.authError = null
       },
@@ -72,21 +66,19 @@ export class AppComponent implements OnInit {
         this.loginForm.enable()
       }
     )
-
   }
 
   logout() {
-
     this.authService.logout()
     this.userName = ''
-    this.isAuth = this.authService.isAuth()
+    this.isAuth = false
+    this.userRole = ''
     this.initForm()
     this.router.navigate(['/home'])
-
-    console.log('logout')
   }
-  initForm(){
-    this.loginForm=this.fb.group({
+
+  initForm() {
+    this.loginForm = this.fb.group({
       userLogin: [null, [Validators.required]],
       passwordHash: [null, [Validators.required]]
     })

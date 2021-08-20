@@ -24,14 +24,12 @@ export class CatalogPageComponent implements OnInit {
 
   constructor(private goodService: GoodsService,
               private manufacturerService: ManufacturerService,
-              private router: ActivatedRoute,
-              private orderService: OrderService) {
+              private router: ActivatedRoute) {
   }
 
   ngOnInit(): void {
     this.getAllGoods()
     this.manufacturers$ = this.manufacturerService.getAll()
-
   }
 
   getAllGoods() {
@@ -61,10 +59,6 @@ export class CatalogPageComponent implements OnInit {
     }
   }
 
-  buy(product: Goods) {
-    this.orderService.addProduct(product)
-  }
-
   onSearch() {
     if (this.searchString != '') {
       this.goods$ = this.goods$
@@ -73,7 +67,7 @@ export class CatalogPageComponent implements OnInit {
   }
 
   onClearSearch($event: Event) {
-    if((<HTMLInputElement>$event.target).value===''){
+    if ((<HTMLInputElement>$event.target).value === '') {
       this.getAllGoods()
     }
   }

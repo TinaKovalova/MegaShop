@@ -1,5 +1,4 @@
 <h3>Регистрация</h3>
-
 <div *ngIf="!isRegister" class="card card-body w-50">
   <form [formGroup]="regForm" (ngSubmit)="onSubmit()">
     <div class="input-group mb-3">
@@ -10,24 +9,25 @@
       <span *ngIf="_userName.errors?.required && (_userName.touched || _userName.dirty)" class="text-danger">
             *Обязательное поле</span>
     </div>
-
     <div class="input-group mb-3">
       <span class="input-group-text w-25" id="basic-addon2">@</span>
       <input type="email" class="form-control" aria-label="Email"
              aria-describedby="basic-addon2"
              formControlName="userLogin">
-      <span class="form-control text-danger" *ngIf="_userLogin.errors?.required && (_userLogin.touched || _userLogin.dirty)"
+      <span class="form-control text-danger"
+            *ngIf="_userLogin.errors?.required && (_userLogin.touched || _userLogin.dirty)"
       >*Обязательное поле</span>
-      <span class="form-control text-danger" *ngIf="_userLogin.errors?.email && (_userLogin.touched || _userLogin.dirty)"
+      <span class="form-control text-danger"
+            *ngIf="_userLogin.errors?.email && (_userLogin.touched || _userLogin.dirty)"
       >*Некорректно введен email</span>
     </div>
-
     <div class="input-group mb-3">
       <span class="input-group-text w-25" id="basic-addon3">Пароль</span>
       <input type="password" class="form-control" aria-label="password"
              aria-describedby="basic-addon3"
              formControlName="passwordHash">
-      <span *ngIf="_passwordHash.errors?.required && (_passwordHash.touched || _passwordHash.dirty)" class="text-danger">
+      <span *ngIf="_passwordHash.errors?.required && (_passwordHash.touched || _passwordHash.dirty)"
+            class="text-danger">
             *Обязательное поле</span>
       <span *ngIf="_passwordHash.errors?.minLength && (_passwordHash.touched || _passwordHash.dirty)"
             class="text-danger">*длина не менее 8 символов </span>

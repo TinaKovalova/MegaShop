@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {GoodsService} from "../services/goods.service";
-import {Goods, Photo} from "../intrfaces";
+import {Goods} from "../intrfaces";
 import {map} from "rxjs/operators";
 import {Observable} from "rxjs";
-import {PhotoService} from "../services/photo.service";
-
 
 @Component({
   selector: 'app-home-page',
@@ -12,11 +10,11 @@ import {PhotoService} from "../services/photo.service";
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-
   goods$!: Observable<Goods[]>
   searchString = ''
 
-  constructor(private goodsService: GoodsService) {}
+  constructor(private goodsService: GoodsService) {
+  }
 
   ngOnInit(): void {
     this.goods$ = this.goodsService.getAll()
@@ -30,12 +28,11 @@ export class HomePageComponent implements OnInit {
     } else {
       this.goods$ = this.goodsService.getAll()
     }
-
   }
+
   onClearSearch($event: Event) {
-    if((<HTMLInputElement>$event.target).value===''){
+    if ((<HTMLInputElement>$event.target).value === '') {
       this.goods$ = this.goodsService.getAll()
     }
   }
-
 }

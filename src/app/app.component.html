@@ -9,7 +9,6 @@
     </button>
     <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
       <ul class="navbar-nav  me-auto mb-2 mb-lg-0   nav-pills nav-fill">
-
         <li class="nav-item" routerLinkActive="active">
           <a class="nav-link" routerLink="/home">
             <img src="assets/pngwing.com.png"
@@ -34,12 +33,9 @@
             </li>
           </ul>
         </li>
-
         <li routerLinkActive="active" class="nav-item">
           <a class="nav-link" routerLink="/order"><span class="fs-5 font-weight-normal">Корзина</span></a>
         </li>
-
-
       </ul>
     </div>
     <div class="dropdown mr-3 btn-group">
@@ -51,10 +47,8 @@
             <span class="fs-5 font-weight-normal">
                <span class="text-info h4 p-2" *ngIf="isAuth">{{userName}}</span>
               <img src="assets/user.png" class="nav-image" alt="userIcon">
-
             </span>
       </a>
-
       <div class="dropdown-menu dropdown-menu-dark bg-info dropdown-menu-end" aria-labelledby="navbarDropdown">
         <div *ngIf="!isAuth else logoutBtn">
           <form class="d-flex flex-column justify-content-center p-3"
@@ -65,7 +59,6 @@
             <div>
               <input class="form-control mt-1" type="password" placeholder="password" formControlName="passwordHash">
             </div>
-
             <button class="btn btn-dark mt-1  btn-sm" type="submit"
                     [disabled]="loginForm.invalid">Войти
             </button>
@@ -82,18 +75,13 @@
             <a routerLink="/registration" class="link-dark">Зарегистрироваться</a>
           </div>
         </div>
-
         <ng-template #logoutBtn>
           <div class="d-flex flex-column justify-content-center bg-info">
             <span class="text-info p-2">{{userName}}</span>
             <button class="btn btn-dark m-1 text-info btn-sm" type="button" (click)="logout()">Выйти</button>
           </div>
-
         </ng-template>
-
-
       </div>
-
     </div>
     <div routerLinkActive="active" *ngIf="userRole==='1'">
       <a class="nav-link"
@@ -103,12 +91,8 @@
              alt="enter">
       </a>
     </div>
-
   </div>
-
 </nav>
-
-
 <div class="container-fluid">
   <router-outlet></router-outlet>
 </div>

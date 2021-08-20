@@ -1,19 +1,16 @@
 <div class="p-2">
   <div class="page-title">
-    <h5 >
+    <h5>
       <a routerLink="/admin/category">Категории ></a>
-      {{isNew?'Добавление':'Редактирование'}} категории
+      {{isNew ? 'Добавление' : 'Редактирование'}} категории
     </h5>
-
   </div>
-
   <div class="row">
     <form class="col-6" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="input-group mb-3">
         <label for="name" class="input-group-text">Название</label>
         <input id="name"
                type="text"
-
                placeholder="Название категории"
                aria-label="Название категории"
                formControlName="name"
@@ -24,7 +21,7 @@
         <span>
         <button class="btn btn-outline-secondary ml-2"
                 (click)="onDelete(category.categoryId)">
-          <i >Удалить</i>
+          <i>Удалить</i>
         </button>
       </span>
       </div>
@@ -33,11 +30,9 @@
           type="submit"
           class="btn btn-outline-info"
           [disabled]="form.invalid || form.disabled">
-
           Сохранить изменения
         </button>
       </div>
     </form>
   </div>
-
 </div>

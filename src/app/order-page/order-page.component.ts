@@ -21,7 +21,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
               private fb: FormBuilder) {
   }
 
-
   ngOnInit(): void {
     this.order = this.orderService.order
     this.sum = this.orderService.sum
@@ -49,7 +48,6 @@ export class OrderPageComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-
     this.ordersService.add(this.form.value.phone, this.form.value.email, this.sum, this.order)
       .subscribe(() => {
         this.isOrdered = true
@@ -57,14 +55,12 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       })
   }
 
-
   isLogin() {
     if (localStorage.getItem('user_login')) {
       this.form.get('email')?.setValue(localStorage.getItem('user_login'))
     } else {
       this.form.get('email')?.setValue(null)
     }
-
   }
 
   changeCount($event: MouseEvent, id: number) {
@@ -75,6 +71,5 @@ export class OrderPageComponent implements OnInit, OnDestroy {
       this.orderService.decreaseCount(id)
       this.sum = this.orderService.sum
     }
-
   }
 }
